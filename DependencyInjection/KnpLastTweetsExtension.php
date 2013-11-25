@@ -65,12 +65,14 @@ class KnpLastTweetsExtension extends Extension
 
                 $driverOptions = $this->setRealFetcherForCacheFetcher($container, $fetcherConfig, $loader);
 
-                if (!empty($driverOptions['cache_service'])) {
-                    $definition = $container->getDefinition('knp_last_tweets.last_tweets_fetcher.doctrine_cache');
-                    $definition->addArgument(new Reference($driverOptions['cache_service']));
-                } else {
-                    throw new InvalidConfigurationException('you must specify the "cache_service" key under "options" which should point to a valid doctrine cache');
+                if (empty($driverOptions['cache_service'])) {
+                    throw new InvalidConfigurationException(
+                        'you must specify the "cache_service" key under "options" which should point to a valid doctrine cache'
+                    );
                 }
+
+                $definition = $container->getDefinition('knp_last_tweets.last_tweets_fetcher.doctrine_cache');
+                $definition->addArgument(new Reference($driverOptions['cache_service']));
                 break;
         }
 

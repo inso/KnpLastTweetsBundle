@@ -26,9 +26,8 @@ class DoctrineCacheFetcher implements FetcherCacheableInterface
 
         $tweets = $this->cacheManager->fetch($cacheId);
         
-        if ($forceRefresh || false === $tweets ) {
+        if ($forceRefresh || false === $tweets) {
             $tweets = $this->fetcher->fetch($username, $limit);
-
             $this->cacheManager->save($cacheId, $tweets);
         }
         
