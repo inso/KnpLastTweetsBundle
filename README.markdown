@@ -39,8 +39,6 @@ public function registerBundles()
 )
 ```
 
-Buzz is required to use this bundle.
-
 ## Usage
 
 After installing the bundle, just do:
@@ -60,20 +58,6 @@ In that case tweets will be sorted by date.
 ## Configuration
 
 You will now have to configure the bundle to use one of the three available drivers.
-
-### Api driver
-
-The simplest driver is the `api` driver: it calls twitter API at each request.
-
-```jinja
-# app/config.yml
-knp_last_tweets:
-    fetcher:
-        driver: api
-```
-
-This is the default - you don't even have to add the previous config to `app/config.yml`.  
-But it's obviously not peformant in production.
 
 ### OAuth driver
 
@@ -132,7 +116,6 @@ knp_last_tweets:
         driver: zend_cache
         options:
             cache_name: knp_last_tweets
-            method: api # or oauth
 ```
 
 This will only call the twitter api after a minimum of 300 seconds.

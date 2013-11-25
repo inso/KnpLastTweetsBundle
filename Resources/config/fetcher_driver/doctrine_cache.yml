@@ -1,6 +1,3 @@
-imports:
-  - { resource: api.yml }
-
 parameters:
     knp_last_tweets.last_tweets_fetcher.doctrine_cache.class: Knp\Bundle\LastTweetsBundle\Twitter\LastTweetsFetcher\DoctrineCacheFetcher
 
@@ -8,4 +5,4 @@ services:
     knp_last_tweets.last_tweets_fetcher.doctrine_cache:
         class: %knp_last_tweets.last_tweets_fetcher.doctrine_cache.class%
         arguments:
-            - @knp_last_tweets.last_tweets_additional_fetcher
+            - @knp_last_tweets.last_tweets_fetcher.oauth

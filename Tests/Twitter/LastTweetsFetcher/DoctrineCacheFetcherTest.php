@@ -2,7 +2,6 @@
 
 namespace Knp\Bundle\LastTweetsBundle\Tests\Twitter\LastTweetsFetcher;
 
-use Knp\Bundle\LastTweetsBundle\Twitter\LastTweetsFetcher\ApiFetcher;
 use Knp\Bundle\LastTweetsBundle\Twitter\Tweet;
 
 class DoctrineCacheFetcherTest extends \PHPUnit_Framework_TestCase

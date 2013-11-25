@@ -30,21 +30,11 @@ class KnpLastTweetsExtension extends Extension
         $loader->load('helper.yml');
         $loader->load('twig.yml');
 
-        // Try to load Buzz service if not found
-        if (!$container->hasDefinition('buzz')) {
-            $loader->load('buzz.yml');
-        }
-
         // Load the good fetcher driver
         $fetcherConfig = isset($config['fetcher']) ? $config['fetcher'] : array();
+        $driver = isset($fetcherConfig['driver']) ? strtolower($fetcherConfig['driver']) : 'oauth';
 
-        $driver = 'api';
-
-        if (isset($fetcherConfig['driver'])) {
-            $driver = strtolower($fetcherConfig['driver']);
-        }
-
-        if (!in_array($driver, array('oauth', 'api', 'zend_cache', 'array', 'doctrine_cache'))) {
+        if (!in_array($driver, array('oauth', 'zend_cache', 'array', 'doctrine_cache'))) {
             throw new InvalidConfigurationException('Invalid knp_last_tweets driver specified');
         }
 
@@ -104,25 +94,12 @@ class KnpLastTweetsExtension extends Extension
 
     private function setRealFetcherForCacheFetcher(ContainerBuilder $container, $fetcherConfig, LoaderInterface $loader)
     {
-        $driverOptions = array();
-        if (isset($fetcherConfig['options'])) {
-            $driverOptions = $fetcherConfig['options'];
-
-            if (isset($driverOptions['method'])) {
-                if (!in_array($driverOptions['method'], array('oauth', 'api'))) {
-                    throw new InvalidConfigurationException('Invalid API driver specified (' . $driverOptions['method'] . '), available are: "oauth", "api"');
-                }
-                if (!$this->oauthExists()) {
-                    throw new InvalidConfigurationException('oauth fetcher requires "inori/twitter-app-bundle"');
-                }
-
-                $loader->load($driverOptions['method'] . '.yml');
-
-                $container->setAlias('knp_last_tweets.last_tweets_additional_fetcher', 'knp_last_tweets.last_tweets_fetcher.' . $driverOptions['method']);
-            } else {
-                $container->setAlias('knp_last_tweets.last_tweets_additional_fetcher', 'knp_last_tweets.last_tweets_fetcher.api');
-            }
+        if (!$this->oauthExists()) {
+            throw new InvalidConfigurationException('oauth fetcher requires "inori/twitter-app-bundle"');
         }
+
+        $driverOptions = isset($fetcherConfig['options']) ? $fetcherConfig['options']:  array();
+        $loader->load('oauth.yml');
 
         return $driverOptions;
     }

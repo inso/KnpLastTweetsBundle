@@ -18,10 +18,10 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode('fetcher')
-                ->treatNullLike(array('driver' => 'api'))
-                ->treatTrueLike(array('driver' => 'api'))
+                ->treatNullLike(array('driver' => 'oauth'))
+                ->treatTrueLike(array('driver' => 'oauth'))
                 ->children()
-                    ->scalarNode('driver')->defaultValue('api')->end()
+                    ->scalarNode('driver')->defaultValue('oauth')->end()
                     ->arrayNode('options')->useAttributeAsKey(0)->prototype('scalar')->end()
                 ->end()
             ->end()
