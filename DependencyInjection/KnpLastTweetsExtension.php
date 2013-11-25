@@ -86,7 +86,7 @@ class KnpLastTweetsExtension extends Extension
 
     protected function doctrineCacheExists()
     {
-        return class_exists('Doctrine\Common\Cache\Cache');
+        return interface_exists('Doctrine\Common\Cache\Cache');
     }
 
     protected function zendCacheExists()
