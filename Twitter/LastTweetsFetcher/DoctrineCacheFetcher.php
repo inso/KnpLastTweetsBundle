@@ -36,6 +36,6 @@ class DoctrineCacheFetcher implements FetcherCacheableInterface
     
     public function forceFetch($username, $limit = 10)
     {
-        return $this->fetch($username, $limit);
+        return $this->fetch($username, $limit, true);
     }
 }

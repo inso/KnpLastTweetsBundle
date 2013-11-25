@@ -61,7 +61,7 @@ EOT
         $output->writeln('Fetching the <info>'.$limit.'</info> last tweets of <info>' . implode(', ', $usernames) . '</info>');
 
         try {
-            $twitter->forceFetch($usernames, $limit, true);
+            $twitter->forceFetch($usernames, $limit);
         } catch (TwitterException $e) {
             $output->writeln('<error>Unable to fetch last tweets: '.$e->getMessage().'</error>');
 
