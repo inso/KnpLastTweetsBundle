@@ -21,12 +21,12 @@
         "php":                      ">=5.3.2",
         "symfony/framework-bundle": "2.*",
         "symfony/yaml":             ">=2.0,<2.3-dev",
-        "twig/twig":                ">=1.6.5"
+        "twig/twig":                ">=1.6.5",
+        "inori/twitter-app-bundle": "*"
     },
 
     "require-dev": {
         "knplabs/knp-zend-cache-bundle": "*",
-        "inori/twitter-app-bundle": "*",
         "doctrine/cache": "*"
     },
 
@@ -41,7 +41,7 @@
                     "type": "zip"
                 },
                 "source": {
-                    "url": "git://github.com/abraham/twitteroauth.git",
+                    "url": "https://github.com/abraham/twitteroauth.git",
                     "type": "git",
                     "reference": "master"
                 }
