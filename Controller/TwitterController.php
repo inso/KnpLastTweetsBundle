@@ -10,7 +10,7 @@ use Knp\Bundle\LastTweetsBundle\Twitter\Exception\TwitterException;
 
 class TwitterController extends Controller
 {
-    public function lastTweetsAction($username, $limit = 10, $age = null)
+    public function lastTweetsAction($username, $limit = 10, $age = null, $view = 'KnpLastTweetsBundle:Tweet:lastTweets.html.twig')
     {
         /* @var $twitter FetcherInterface */
         $twitter = $this->get('knp_last_tweets.last_tweets_fetcher');
@@ -21,7 +21,7 @@ class TwitterController extends Controller
             $tweets = array();
         }
 
-        $response = $this->render('KnpLastTweetsBundle:Tweet:lastTweets.html.twig', array(
+        $response = $this->render($view, array(
             'username' => $username,
             'tweets'   => $tweets,
         ));
